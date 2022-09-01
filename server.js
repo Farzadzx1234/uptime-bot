@@ -7,20 +7,6 @@ client.login(process.env.token);
 const fetch = require("node-fetch");
 const fs = require("fs");
 
-setInterval(() => {
-  var links = db.get("linkler");
-  if (!links) return;
-  var linkA = links.map(c => c.url);
-  linkA.forEach(link => {
-    try {
-      fetch(link);
-    } catch (e) {
-      console.log("" + e);
-    }
-  });
-  console.log("Pinged Successfully.");
-}, 60000);
-
 client.on("ready", () => {
   if (!Array.isArray(db.get("linkler"))) {
     db.set("linkler", []);
